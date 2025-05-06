@@ -16,17 +16,17 @@
       "type": "string",
       "required": true
     },
-    "modules": {
+    "module_sections": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::module.module",
-      "inversedBy": "sections"
+      "relation": "oneToMany",
+      "target": "api::module-section.module-section",
+      "mappedBy": "section"
     },
-    "resources": {
+    "section_resources": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::resource.resource",
-      "mappedBy": "sections"
+      "relation": "oneToMany",
+      "target": "api::section-resource.section-resource",
+      "mappedBy": "section"
     }
   }
 } 

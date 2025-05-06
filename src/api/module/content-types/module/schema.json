@@ -22,11 +22,11 @@
     "order": {
       "type": "integer"
     },
-    "sections": {
+    "module_sections": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::section.section",
-      "mappedBy": "modules"
+      "relation": "oneToMany",
+      "target": "api::module-section.module-section",
+      "mappedBy": "module"
     }
   }
 } 

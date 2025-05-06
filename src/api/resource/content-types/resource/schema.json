@@ -32,11 +32,11 @@
       "type": "string",
       "required": true
     },
-    "sections": {
+    "section_resources": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::section.section",
-      "inversedBy": "resources"
+      "relation": "oneToMany",
+      "target": "api::section-resource.section-resource",
+      "mappedBy": "resource"
     }
   }
 } 
