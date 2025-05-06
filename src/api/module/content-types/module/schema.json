@@ -12,29 +12,29 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "Title": {
       "type": "string",
       "required": true,
       "unique": true,
       "displayName": "Title"
     },
-    "description": {
+    "Description": {
       "type": "text",
       "displayName": "Description"
     },
-    "order": {
+    "Order": {
       "type": "integer",
       "required": true,
       "unique": true,
       "min": 1,
-      "displayName": "Order"
+      "displayName": "Order",
+      "default": 1
     },
-    "sections": {
+    "Sections": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::section.section",
-      "inversedBy": "modules",
-      "displayName": "Sections"
+      "mappedBy": "Modules"
     }
   }
-} 
+}

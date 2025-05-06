@@ -12,26 +12,33 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "Title": {
       "type": "string",
       "required": true,
       "unique": true,
       "displayName": "Title"
     },
-    "description": {
+    "Description": {
       "type": "text",
       "displayName": "Description"
     },
-    "thumbnail": {
+    "Thumbnail": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ],
-      "displayName": "Thumbnail"
+      "pluginOptions": {
+        "upload": {
+          "dimensions": {
+            "width": 170,
+            "height": 84
+          }
+        }
+      }
     },
-    "resourceType": {
+    "Type": {
       "type": "enumeration",
       "enum": [
         "video",
@@ -41,17 +48,16 @@
       "required": true,
       "displayName": "Resource Type"
     },
-    "url": {
+    "Url": {
       "type": "string",
       "required": true,
       "displayName": "URL"
     },
-    "sections": {
+    "Sections": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::section.section",
-      "mappedBy": "resources",
-      "displayName": "Sections"
+      "mappedBy": "Resources"
     }
   }
-} 
+}
