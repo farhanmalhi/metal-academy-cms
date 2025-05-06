@@ -14,4 +14,9 @@ export default ({ env }) => ({
     nps: env.bool('FLAG_NPS', true),
     promoteEE: env.bool('FLAG_PROMOTE_EE', true),
   },
+  menu: {
+    logo: 'logo.png',
+    marketplace: false,
+    deploy: false,
+  },
 });

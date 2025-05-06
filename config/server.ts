@@ -4,4 +4,30 @@ export default ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
+  security: {
+    csrf: {
+      enabled: true,
+      key: '_csrf',
+      secret: env('CSRF_SECRET', 'your-csrf-secret'),
+    },
+    xframe: {
+      enabled: true,
+      value: 'SAMEORIGIN',
+    },
+    hsts: {
+      enabled: true,
+      maxAge: 31536000,
+      includeSubDomains: true,
+    },
+    xss: {
+      enabled: true,
+      mode: 'block',
+    },
+    cors: {
+      enabled: true,
+      origin: env('CORS_ORIGIN', '*'),
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+    },
+  },
 });
