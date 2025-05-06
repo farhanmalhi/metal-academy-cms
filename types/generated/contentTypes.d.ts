@@ -402,6 +402,7 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
       > &
       Schema.Attribute.DefaultTo<1>;
     publishedAt: Schema.Attribute.DateTime;
+    SectionOrders: Schema.Attribute.Component<'ordering.section-order', true>;
     Sections: Schema.Attribute.Relation<'manyToMany', 'api::section.section'>;
     Title: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -480,15 +481,8 @@ export interface ApiSectionSection extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     Modules: Schema.Attribute.Relation<'manyToMany', 'api::module.module'>;
-    Order: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
     publishedAt: Schema.Attribute.DateTime;
+    ResourceOrders: Schema.Attribute.Component<'ordering.resource-order', true>;
     Resources: Schema.Attribute.Relation<
       'manyToMany',
       'api::resource.resource'

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_ordering_section_orders",
+  "info": {
+    "displayName": "Section Order",
+    "description": "Defines the order of a section within a module"
+  },
+  "options": {},
+  "attributes": {
+    "Order": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "displayName": "Order"
+    },
+    "Section": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::section.section",
+      "displayName": "Section"
+    }
+  }
+} 

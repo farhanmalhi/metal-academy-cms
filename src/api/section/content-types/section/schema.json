@@ -22,12 +22,6 @@
       "type": "text",
       "displayName": "Description"
     },
-    "Order": {
-      "type": "integer",
-      "required": true,
-      "min": 1,
-      "displayName": "Order"
-    },
     "Modules": {
       "type": "relation",
       "relation": "manyToMany",
@@ -39,6 +33,12 @@
       "relation": "manyToMany",
       "target": "api::resource.resource",
       "inversedBy": "Sections"
+    },
+    "ResourceOrders": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ordering.resource-order",
+      "displayName": "Resource Orders"
     }
   }
 }

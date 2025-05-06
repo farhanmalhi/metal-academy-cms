@@ -82,25 +82,32 @@ metal-academy-cms/
 ## Content Types
 
 ### Module
-- Title (required, unique)
-- Description
-- Sections (many-to-many relationship)
-- Section Orders (component)
+- Title (required, unique, string)
+- Description (text)
+- Sections (many-to-many relationship with Section)
+- Section Orders (optional component for custom ordering)
+  - Order (integer)
+  - Section (one-to-one relationship with Section)
 
 ### Section
-- Title (required, unique)
-- Description
-- Modules (many-to-many relationship)
-- Resources (many-to-many relationship)
-- Resource Orders (component)
+- Title (required, unique, string)
+- Description (text)
+- Modules (many-to-many relationship with Module)
+- Resources (many-to-many relationship with Resource)
+- Resource Orders (optional component for custom ordering)
+  - Order (integer)
+  - Resource (one-to-one relationship with Resource)
 
 ### Resource
-- Title (required, unique)
-- Description
-- Type (video, flow, link)
-- URL (required)
-- Thumbnail (optional)
-- Sections (many-to-many relationship)
+- Title (required, unique, string)
+- Description (text)
+- Type (enum: video, flow, link)
+- URL (required, string)
+- Thumbnail (optional, media)
+  - Width: 1280px
+  - Height: 720px
+  - Format: jpg, jpeg, png
+- Sections (many-to-many relationship with Section)
 
 ## Deployment
 

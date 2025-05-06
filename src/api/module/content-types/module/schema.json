@@ -35,6 +35,12 @@
       "relation": "manyToMany",
       "target": "api::section.section",
       "mappedBy": "Modules"
+    },
+    "SectionOrders": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ordering.section-order",
+      "displayName": "Section Orders"
     }
   }
 }
