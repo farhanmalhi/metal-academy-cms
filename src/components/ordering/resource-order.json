@@ -16,7 +16,8 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::resource.resource",
-      "displayName": "Resource"
+      "displayName": "Resource",
+      "required": false
     }
   }
 } 

@@ -38,7 +38,8 @@
       "type": "component",
       "repeatable": true,
       "component": "ordering.resource-order",
-      "displayName": "Resource Orders"
+      "displayName": "Resource Orders",
+      "required": false
     }
   }
 }
