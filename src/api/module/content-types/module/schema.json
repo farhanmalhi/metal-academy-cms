@@ -14,19 +14,27 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true,
+      "displayName": "Title"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "displayName": "Description"
     },
     "order": {
-      "type": "integer"
+      "type": "integer",
+      "required": true,
+      "unique": true,
+      "min": 1,
+      "displayName": "Order"
     },
-    "module_sections": {
+    "sections": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::module-section.module-section",
-      "mappedBy": "module"
+      "relation": "manyToMany",
+      "target": "api::section.section",
+      "inversedBy": "modules",
+      "displayName": "Sections"
     }
   }
 } 

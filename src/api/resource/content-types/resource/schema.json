@@ -14,29 +14,44 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true,
+      "displayName": "Title"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "displayName": "Description"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "displayName": "Thumbnail"
     },
     "resourceType": {
       "type": "enumeration",
       "enum": [
         "video",
         "flow",
-        "externalLink"
+        "link"
       ],
-      "required": true
+      "required": true,
+      "displayName": "Resource Type"
     },
     "url": {
       "type": "string",
-      "required": true
+      "required": true,
+      "displayName": "URL"
     },
-    "section_resources": {
+    "sections": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::section-resource.section-resource",
-      "mappedBy": "resource"
+      "relation": "manyToMany",
+      "target": "api::section.section",
+      "mappedBy": "resources",
+      "displayName": "Sections"
     }
   }
 } 

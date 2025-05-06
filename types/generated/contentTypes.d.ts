@@ -369,38 +369,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiModuleSectionModuleSection
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'module_sections';
-  info: {
-    description: 'Join table for Module and Section with ordering';
-    displayName: 'Module Section';
-    pluralName: 'module-sections';
-    singularName: 'module-section';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::module-section.module-section'
-    > &
-      Schema.Attribute.Private;
-    module: Schema.Attribute.Relation<'manyToOne', 'api::module.module'>;
-    order: Schema.Attribute.Integer & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    section: Schema.Attribute.Relation<'manyToOne', 'api::section.section'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiModuleModule extends Struct.CollectionTypeSchema {
   collectionName: 'modules';
   info: {
@@ -423,13 +391,20 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
       'api::module.module'
     > &
       Schema.Attribute.Private;
-    module_sections: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::module-section.module-section'
-    >;
-    order: Schema.Attribute.Integer;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    sections: Schema.Attribute.Relation<'manyToMany', 'api::section.section'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -459,51 +434,17 @@ export interface ApiResourceResource extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    resourceType: Schema.Attribute.Enumeration<
-      ['video', 'flow', 'externalLink']
-    > &
+    resourceType: Schema.Attribute.Enumeration<['video', 'flow', 'link']> &
       Schema.Attribute.Required;
-    section_resources: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::section-resource.section-resource'
-    >;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    sections: Schema.Attribute.Relation<'manyToMany', 'api::section.section'>;
+    thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     url: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface ApiSectionResourceSectionResource
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'section_resources';
-  info: {
-    description: 'Join table for Section and Resource with ordering';
-    displayName: 'Section Resource';
-    pluralName: 'section-resources';
-    singularName: 'section-resource';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::section-resource.section-resource'
-    > &
-      Schema.Attribute.Private;
-    order: Schema.Attribute.Integer & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    resource: Schema.Attribute.Relation<'manyToOne', 'api::resource.resource'>;
-    section: Schema.Attribute.Relation<'manyToOne', 'api::section.section'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -522,22 +463,30 @@ export interface ApiSectionSection extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::section.section'
     > &
       Schema.Attribute.Private;
-    module_sections: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::module-section.module-section'
-    >;
+    modules: Schema.Attribute.Relation<'manyToMany', 'api::module.module'>;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     publishedAt: Schema.Attribute.DateTime;
-    section_resources: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::section-resource.section-resource'
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
     >;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1053,10 +1002,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::module-section.module-section': ApiModuleSectionModuleSection;
       'api::module.module': ApiModuleModule;
       'api::resource.resource': ApiResourceResource;
-      'api::section-resource.section-resource': ApiSectionResourceSectionResource;
       'api::section.section': ApiSectionSection;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

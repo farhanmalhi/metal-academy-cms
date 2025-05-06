@@ -14,19 +14,33 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true,
+      "displayName": "Title"
     },
-    "module_sections": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::module-section.module-section",
-      "mappedBy": "section"
+    "description": {
+      "type": "text",
+      "displayName": "Description"
     },
-    "section_resources": {
+    "order": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "displayName": "Order"
+    },
+    "modules": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::section-resource.section-resource",
-      "mappedBy": "section"
+      "relation": "manyToMany",
+      "target": "api::module.module",
+      "mappedBy": "sections",
+      "displayName": "Modules"
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resource.resource",
+      "inversedBy": "sections",
+      "displayName": "Resources"
     }
   }
 } 
