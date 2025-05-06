@@ -1,3 +1,131 @@
+# Metal Academy CMS
+
+A Strapi-based Content Management System for Metal Academy, designed to manage learning resources, modules, and sections.
+
+## Features
+
+- **Module Management**
+  - Create and organize learning modules
+  - Set module order and hierarchy
+  - Add descriptions and metadata
+
+- **Section Management**
+  - Create sections within modules
+  - Organize sections with custom ordering
+  - Add detailed descriptions
+
+- **Resource Management**
+  - Support for multiple resource types:
+    - Videos
+    - Flows
+    - External Links
+  - Thumbnail support for resources
+  - Resource ordering within sections
+
+## Tech Stack
+
+- Strapi v5
+- SQLite (Development)
+- Node.js >= 18.0.0
+- TypeScript
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 18.0.0
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/metal-academy-cms.git
+cd metal-academy-cms
+```
+
+2. Install dependencies:
+```bash
+yarn install
+```
+
+3. Start the development server:
+```bash
+yarn develop
+```
+
+4. Access the admin panel at `http://localhost:1337/admin`
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+ADMIN_JWT_SECRET=your-secret-key
+API_TOKEN_SALT=your-salt
+TRANSFER_TOKEN_SALT=your-transfer-salt
+```
+
+## Project Structure
+
+```
+metal-academy-cms/
+├── src/
+│   ├── api/              # API endpoints and controllers
+│   ├── components/       # Reusable components
+│   ├── config/          # Strapi configuration
+│   └── extensions/      # Strapi extensions
+├── public/              # Public assets
+└── database/           # Database files
+```
+
+## Content Types
+
+### Module
+- Title (required, unique)
+- Description
+- Sections (many-to-many relationship)
+- Section Orders (component)
+
+### Section
+- Title (required, unique)
+- Description
+- Modules (many-to-many relationship)
+- Resources (many-to-many relationship)
+- Resource Orders (component)
+
+### Resource
+- Title (required, unique)
+- Description
+- Type (video, flow, link)
+- URL (required)
+- Thumbnail (optional)
+- Sections (many-to-many relationship)
+
+## Deployment
+
+This project is deployed on Strapi Cloud. For deployment:
+
+1. Push changes to the main branch
+2. Strapi Cloud will automatically deploy the changes
+3. Set environment variables in the Strapi Cloud dashboard
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is proprietary and confidential.
+
+## Support
+
+For support, please contact the development team.
+
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
