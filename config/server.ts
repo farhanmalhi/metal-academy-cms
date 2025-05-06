@@ -25,9 +25,11 @@ export default ({ env }) => ({
     },
     cors: {
       enabled: true,
-      origin: env('CORS_ORIGIN', '*'),
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      origin: '*',
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      credentials: true,
+      maxAge: 86400,
     },
   },
 });
