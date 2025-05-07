@@ -4,4 +4,16 @@
 
 import { factories } from '@strapi/strapi';
 
-export default factories.createCoreRouter('api::module.module'); 
+export default {
+  routes: [
+    {
+      method: 'GET',
+      path: '/modules/tree',
+      handler: 'module.getAllWithNested',
+      config: {
+        policies: [],
+        auth: false,
+      },
+    }
+  ]
+}; 
