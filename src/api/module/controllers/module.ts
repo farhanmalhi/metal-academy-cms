@@ -37,7 +37,20 @@ export default factories.createCoreController(
                 const orderedResources = section.resourceOrders?.sort(
                   (a, b) => a.order - b.order
                 )
-                  .map((order) => order.resource)
+                  .map((order) => {
+                    const resource = order.resource;
+                    if (!resource) return null;
+                    
+                    // Only return needed fields for resource
+                    return {
+                      id: resource.id,
+                      title: resource.title,
+                      description: resource.description,
+                      type: resource.type,
+                      url: resource.url,
+                      thumbnail: resource.thumbnail
+                    };
+                  })
                   .filter(Boolean);
 
                 return {
