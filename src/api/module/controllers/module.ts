@@ -4,32 +4,17 @@
 
 import { factories } from "@strapi/strapi";
 
-
 export default factories.createCoreController(
   "api::module.module",
   ({ strapi }) => ({
     async getAllWithNested(ctx) {
       try {
-        const modules = await strapi.entityService.findMany("api::module.module", {
-          populate: {
-            Sections: {
-              populate: {
-                Resources: true,
-                ResourceOrders: {
-                  populate: {
-                    Resource: true,
-                  },
-                },
-              },
-            },
-            SectionOrders: {
-              populate: {
-                Section: true,
-              },
-            },
-          },
-          orderBy: { Order: "asc" },
-        }) as any[];
+        const modules = (await strapi.entityService.findMany(
+          "api::module.module",
+          {
+            populate: ["Sections.Resources", "SectionOrders.Section.Resources"],
+          }
+        )) as any[];
 
         // Transform the data to include ordered sections and resources
         const transformedModules = modules.map((module) => {
