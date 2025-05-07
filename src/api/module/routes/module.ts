@@ -12,7 +12,9 @@ export default {
       handler: 'module.getAllWithNested',
       config: {
         policies: [],
-        auth: true,
+        auth: {
+          strategies: ['api-token', 'admin'],
+        },
       },
     }
   ]
