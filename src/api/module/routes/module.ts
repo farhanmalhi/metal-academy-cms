@@ -12,7 +12,7 @@ export default {
       handler: 'module.getAllWithNested',
       config: {
         policies: [],
-        auth: false,
+        auth: true,
       },
     }
   ]
