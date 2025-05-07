@@ -7,7 +7,7 @@ export interface OrderingResourceOrder extends Struct.ComponentSchema {
     displayName: 'Resource Order';
   };
   attributes: {
-    Order: Schema.Attribute.Integer &
+    order: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
@@ -15,7 +15,7 @@ export interface OrderingResourceOrder extends Struct.ComponentSchema {
         },
         number
       >;
-    Resource: Schema.Attribute.Relation<'oneToOne', 'api::resource.resource'>;
+    resource: Schema.Attribute.Relation<'oneToOne', 'api::resource.resource'>;
   };
 }
 
@@ -26,7 +26,7 @@ export interface OrderingSectionOrder extends Struct.ComponentSchema {
     displayName: 'Section Order';
   };
   attributes: {
-    Order: Schema.Attribute.Integer &
+    order: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
@@ -34,7 +34,7 @@ export interface OrderingSectionOrder extends Struct.ComponentSchema {
         },
         number
       >;
-    Section: Schema.Attribute.Relation<'oneToOne', 'api::section.section'>;
+    section: Schema.Attribute.Relation<'oneToOne', 'api::section.section'>;
   };
 }
 

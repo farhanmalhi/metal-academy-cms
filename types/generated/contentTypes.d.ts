@@ -384,14 +384,14 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::module.module'
     > &
       Schema.Attribute.Private;
-    Order: Schema.Attribute.Integer &
+    order: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetMinMax<
@@ -402,9 +402,9 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
       > &
       Schema.Attribute.DefaultTo<1>;
     publishedAt: Schema.Attribute.DateTime;
-    SectionOrders: Schema.Attribute.Component<'ordering.section-order', true>;
-    Sections: Schema.Attribute.Relation<'manyToMany', 'api::section.section'>;
-    Title: Schema.Attribute.String &
+    sectionOrders: Schema.Attribute.Component<'ordering.section-order', true>;
+    sections: Schema.Attribute.Relation<'manyToMany', 'api::section.section'>;
+    title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
@@ -428,7 +428,7 @@ export interface ApiResourceResource extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -436,8 +436,8 @@ export interface ApiResourceResource extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    Sections: Schema.Attribute.Relation<'manyToMany', 'api::section.section'>;
-    Thumbnail: Schema.Attribute.Media<'images'> &
+    sections: Schema.Attribute.Relation<'manyToMany', 'api::section.section'>;
+    thumbnail: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         upload: {
           dimensions: {
@@ -446,15 +446,15 @@ export interface ApiResourceResource extends Struct.CollectionTypeSchema {
           };
         };
       }>;
-    Title: Schema.Attribute.String &
+    title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    Type: Schema.Attribute.Enumeration<['video', 'flow', 'link']> &
+    type: Schema.Attribute.Enumeration<['video', 'flow', 'link']> &
       Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Url: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -473,21 +473,21 @@ export interface ApiSectionSection extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::section.section'
     > &
       Schema.Attribute.Private;
-    Modules: Schema.Attribute.Relation<'manyToMany', 'api::module.module'>;
+    modules: Schema.Attribute.Relation<'manyToMany', 'api::module.module'>;
     publishedAt: Schema.Attribute.DateTime;
-    ResourceOrders: Schema.Attribute.Component<'ordering.resource-order', true>;
-    Resources: Schema.Attribute.Relation<
+    resourceOrders: Schema.Attribute.Component<'ordering.resource-order', true>;
+    resources: Schema.Attribute.Relation<
       'manyToMany',
       'api::resource.resource'
     >;
-    Title: Schema.Attribute.String &
+    title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;

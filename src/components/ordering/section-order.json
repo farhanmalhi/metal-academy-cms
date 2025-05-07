@@ -6,17 +6,16 @@
   },
   "options": {},
   "attributes": {
-    "Order": {
+    "order": {
       "type": "integer",
       "required": true,
       "min": 1,
       "displayName": "Order"
     },
-    "Section": {
+    "section": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::section.section",
-      "displayName": "Section"
+      "target": "api::section.section"
     }
   }
-} 
+}

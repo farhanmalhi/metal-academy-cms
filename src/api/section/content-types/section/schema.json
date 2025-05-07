@@ -12,34 +12,34 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true,
       "unique": true,
       "displayName": "Title"
     },
-    "Description": {
+    "description": {
       "type": "text",
       "displayName": "Description"
     },
-    "Modules": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::module.module",
-      "inversedBy": "Sections"
-    },
-    "Resources": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::resource.resource",
-      "inversedBy": "Sections"
-    },
-    "ResourceOrders": {
+    "resourceOrders": {
       "type": "component",
       "repeatable": true,
       "component": "ordering.resource-order",
       "displayName": "Resource Orders",
       "required": false
+    },
+    "modules": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::module.module",
+      "mappedBy": "sections"
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resource.resource",
+      "mappedBy": "sections"
     }
   }
 }

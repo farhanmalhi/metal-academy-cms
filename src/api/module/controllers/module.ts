@@ -13,45 +13,47 @@ export default factories.createCoreController(
           "api::module.module",
           {
             populate: [
-              "Sections.Resources",
-              "Sections.ResourceOrders.Resource",
-              "SectionOrders.Section.Resources",
-              "SectionOrders.Section.ResourceOrders.Resource"
+              "sections.resources",
+              "sections.resourceOrders.resource",
+              "sectionOrders.section.resources",
+              "sectionOrders.section.resourceOrders.resource"
             ],
           }
         )) as any[];
 
+        // Sort modules by order
+        const sortedModules = modules.sort((a, b) => a.order - b.order);
+
         // Transform the data to include ordered sections and resources
-        const transformedModules = modules.map((module) => {
+        const transformedModules = sortedModules.map((module) => {
           // Get ordered sections
           const orderedSections =
-            module.SectionOrders?.sort((a, b) => a.Order - b.Order)
+            module.sectionOrders?.sort((a, b) => a.order - b.order)
               .map((order) => {
-                const section = order.Section;
+                const section = order.section;
                 if (!section) return null;
 
                 // Get ordered resources for this section
-                const orderedResources = section.ResourceOrders?.sort(
-                  (a, b) => a.Order - b.Order
+                const orderedResources = section.resourceOrders?.sort(
+                  (a, b) => a.order - b.order
                 )
-                  .map((order) => order.Resource)
+                  .map((order) => order.resource)
                   .filter(Boolean);
 
                 return {
                   id: section.id,
-                  Title: section.Title,
-                  Description: section.Description,
-                  Resources: orderedResources || [],
+                  title: section.title,
+                  description: section.description,
+                  resources: orderedResources || [],
                 };
               })
               .filter(Boolean) || [];
 
           return {
             id: module.id,
-            Title: module.Title,
-            Description: module.Description,
-            Order: module.Order,
-            Sections: orderedSections,
+            title: module.title,
+            description: module.description,
+            sections: orderedSections,
           };
         });
 

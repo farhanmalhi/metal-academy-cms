@@ -12,17 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true,
       "unique": true,
       "displayName": "Title"
     },
-    "Description": {
+    "description": {
       "type": "text",
       "displayName": "Description"
     },
-    "Thumbnail": {
+    "thumbnail": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -38,7 +38,7 @@
         }
       }
     },
-    "Type": {
+    "type": {
       "type": "enumeration",
       "enum": [
         "video",
@@ -48,16 +48,16 @@
       "required": true,
       "displayName": "Resource Type"
     },
-    "Url": {
+    "url": {
       "type": "string",
       "required": true,
       "displayName": "URL"
     },
-    "Sections": {
+    "sections": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::section.section",
-      "mappedBy": "Resources"
+      "inversedBy": "resources"
     }
   }
 }

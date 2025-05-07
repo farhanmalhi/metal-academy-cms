@@ -6,18 +6,17 @@
   },
   "options": {},
   "attributes": {
-    "Order": {
+    "order": {
       "type": "integer",
       "required": true,
       "min": 1,
       "displayName": "Order"
     },
-    "Resource": {
+    "resource": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::resource.resource",
-      "displayName": "Resource",
       "required": false
     }
   }
-} 
+}
