@@ -3,6 +3,7 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { v4 as uuidv4 } from 'uuid';
 
 export default factories.createCoreController(
   "api::module.module",
@@ -44,6 +45,7 @@ export default factories.createCoreController(
                     // Only return needed fields for resource
                     return {
                       id: resource.id,
+                      key: uuidv4(),
                       title: resource.title,
                       description: resource.description,
                       type: resource.type,
@@ -55,6 +57,7 @@ export default factories.createCoreController(
 
                 return {
                   id: section.id,
+                  key: uuidv4(),
                   title: section.title,
                   description: section.description,
                   resources: orderedResources || [],
@@ -64,6 +67,7 @@ export default factories.createCoreController(
 
           return {
             id: module.id,
+            key: uuidv4(),
             title: module.title,
             description: module.description,
             sections: orderedSections,
