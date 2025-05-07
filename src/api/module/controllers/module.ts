@@ -12,7 +12,12 @@ export default factories.createCoreController(
         const modules = (await strapi.entityService.findMany(
           "api::module.module",
           {
-            populate: ["Sections.Resources", "SectionOrders.Section.Resources"],
+            populate: [
+              "Sections.Resources",
+              "Sections.ResourceOrders.Resource",
+              "SectionOrders.Section.Resources",
+              "SectionOrders.Section.ResourceOrders.Resource"
+            ],
           }
         )) as any[];
 
